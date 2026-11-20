@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#050505">
+  <meta name="description" content="Cedric Luis DC. Cacanindin — student portfolio.">
+  <title>Cedric Luis DC. Cacanindin | Portfolio</title>
+  <style>
+    :root {
+      --black: #050505;
+      --surface: #111111;
+      --surface-2: #191919;
+      --line: #343434;
+      --white: #f3f3f3;
+      --gray: #a3a3a3;
+      --silver: #d0d0d0;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; color: var(--white); background: var(--black);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.65; overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+    #stars, #galaxy-glow { position: fixed; inset: 0; pointer-events: none; }
+    #stars {
+      z-index: -2; opacity: .62;
+      background-image:
+        radial-gradient(1px 1px at 12% 17%, #eee 98%, transparent),
+        radial-gradient(1px 1px at 68% 29%, #aaa 98%, transparent),
+        radial-gradient(2px 2px at 84% 74%, #ddd 98%, transparent),
+        radial-gradient(1px 1px at 33% 82%, #fff 98%, transparent),
+        radial-gradient(1px 1px at 91% 11%, #888 98%, transparent);
+      background-size: 230px 230px;
+      animation: star-drift 85s linear infinite;
+    }
+    #galaxy-glow {
+      z-index: -1;
+      background:
+        radial-gradient(ellipse at 15% 18%, rgba(180,180,180,.10), transparent 38%),
+        radial-gradient(ellipse at 86% 38%, rgba(110,110,110,.10), transparent 42%),
+        radial-gradient(ellipse at 52% 95%, rgba(150,150,150,.07), transparent 44%);
+    }
+    @keyframes star-drift { to { background-position: 230px 460px; } }
+    @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-11px); } }
+    @keyframes fade-up { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes orbit-spin { to { transform: rotate(360deg); } }
+
+    .container { width: min(1080px, 90%); margin: auto; }
+    header {
+      position: sticky; top: 0; z-index: 20;
+      background: rgba(5,5,5,.86); backdrop-filter: blur(15px);
+      border-bottom: 1px solid rgba(210,210,210,.12);
+    }
+    nav { min-height: 70px; display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+    .brand { font-size: .95rem; font-weight: 850; letter-spacing: .12em; }
+    .brand span { color: var(--gray); }
+    .nav-links { display: flex; gap: 25px; color: var(--gray); font-size: .9rem; }
+    .nav-links a { transition: color .2s ease; }
+    .nav-links a:hover { color: var(--white); }
+
+    .hero { min-height: 84vh; display: grid; place-items: center; text-align: center; padding: 90px 0 75px; }
+    .hero-inner { animation: fade-up .9s ease both; }
+    .planet {
+      width: 104px; height: 104px; margin: 0 auto 30px; border-radius: 50%;
+      display: grid; place-items: center; position: relative;
+      background: radial-gradient(circle at 35% 28%, #777, #292929 52%, #090909 76%);
+      box-shadow: 0 0 48px rgba(220,220,220,.13), inset -12px -12px 24px rgba(0,0,0,.7);
+      animation: float 5s ease-in-out infinite;
+    }
+    .planet::before, .planet::after {
+      content: ""; position: absolute; width: 155px; height: 42px;
+      border: 1px solid rgba(220,220,220,.55); border-radius: 50%;
+    }
+    .planet::before { transform: rotate(-25deg); }
+    .planet::after { width: 180px; height: 58px; border-color: rgba(150,150,150,.28); transform: rotate(28deg); }
+    .planet span { font-size: 2rem; color: #eee; }
+    .eyebrow { color: #bdbdbd; text-transform: uppercase; letter-spacing: .24em; font-size: .73rem; font-weight: 750; }
+    h1 { margin: 15px 0; font-size: clamp(2.4rem, 7vw, 5.4rem); line-height: 1.08; letter-spacing: -.055em; }
+    h1 span { color: transparent; background: linear-gradient(100deg, #fff, #999, #ddd); background-clip: text; -webkit-background-clip: text; }
+    .hero p { max-width: 650px; color: var(--gray); margin: 0 auto 28px; font-size: 1.06rem; }
+    .actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; }
+    .btn {
+      display: inline-flex; justify-content: center; align-items: center; gap: 8px;
+      padding: 11px 19px; border-radius: 999px; border: 1px solid #555;
+      background: #171717; color: var(--white); cursor: pointer;
+      transition: transform .25s ease, background .25s ease, border-color .25s ease, box-shadow .25s ease;
+    }
+    .btn.primary { background: #dedede; color: #090909; border-color: #dedede; font-weight: 700; }
+    .btn:hover { transform: translateY(-3px); border-color: #eee; background: #292929; box-shadow: 0 9px 28px rgba(220,220,220,.10); }
+    .btn.primary:hover { background: #fff; }
+
+    section { padding: 72px 0; scroll-margin-top: 75px; }
+    .section-head { margin-bottom: 27px; }
+    .section-head h2 { margin: 6px 0; font-size: clamp(1.85rem, 4vw, 2.65rem); letter-spacing: -.035em; }
+    .section-head p { color: var(--gray); margin: 0; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(235px, 1fr)); gap: 18px; }
+    .card {
+      padding: 24px; border: 1px solid var(--line); border-radius: 18px;
+      background: linear-gradient(145deg, rgba(31,31,31,.96), rgba(12,12,12,.96));
+      transition: transform .28s ease, border-color .28s ease, box-shadow .28s ease;
+      animation: fade-up .7s ease both;
+    }
+    .card:hover { transform: translateY(-6px); border-color: #888; box-shadow: 0 16px 35px rgba(0,0,0,.55), 0 0 22px rgba(210,210,210,.06); }
+    .icon { font-size: 1.6rem; filter: grayscale(1); }
+    .card h3 { margin: 12px 0 7px; }
+    .card p { color: var(--gray); margin: 0; }
+    .about-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 18px; }
+    .mission {
+      border: 1px solid #444; border-radius: 18px; padding: 25px;
+      background: linear-gradient(140deg, #242424, #101010);
+    }
+    .mission p { color: var(--gray); }
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 17px; }
+    .tag { color: #ddd; background: #242424; border: 1px solid #484848; border-radius: 999px; padding: 5px 10px; font-size: .8rem; }
+
+    .task-card { min-height: 220px; }
+    .task-number { color: #c7c7c7; font-size: .76rem; font-weight: 800; letter-spacing: .16em; }
+    [] { outline: none; border-radius: 4px; }
+    []:focus { box-shadow: 0 0 0 2px #777; }
+    .edit-tip { margin-top: 18px; color: var(--gray); font-size: .87rem; }
+    .work-actions { margin-top: 22px; }
+    .work-image { width: 100%; max-height: 270px; object-fit: contain; border-radius: 12px; margin-top: 16px; background: #080808; border: 1px solid #333; }
+    .task-card { cursor:pointer; position:relative; }
+    .task-card::after { content:"OPEN TASK ↗"; display:block; color:#bbb; font-size:.75rem; letter-spacing:.12em; margin-top:16px; }
+    .task-card:focus-visible { outline:2px solid #aaa; outline-offset:3px; }
+    .task-detail-modal-backdrop { position:fixed; inset:0; z-index:60; display:none; place-items:center; padding:20px; background:rgba(0,0,0,.84); backdrop-filter:blur(8px); overflow-y:auto; }
+    .task-detail-modal-backdrop.open { display:grid; }
+    .task-detail-modal { width:min(650px,100%); max-height:90vh; overflow-y:auto; padding:25px; border-radius:18px; background:#171717; border:1px solid #555; box-shadow:0 20px 70px rgba(0,0,0,.65); }
+    .task-detail-modal h3 { margin-top:0; }
+    .task-detail-modal label { display:block; margin:14px 0 6px; color:#ccc; font-size:.9rem; }
+    .task-detail-modal input, .task-detail-modal textarea { width:100%; padding:11px; border-radius:10px; border:1px solid #444; background:#090909; color:#eee; font:inherit; }
+    .task-detail-modal textarea { min-height:125px; resize:vertical; }
+    .detail-preview { width:100%; max-height:280px; object-fit:contain; border:1px solid #333; border-radius:12px; margin-top:14px; background:#080808; }
+    .work-modal-backdrop { position:fixed; inset:0; z-index:50; display:none; place-items:center; padding:20px; background:rgba(0,0,0,.8); backdrop-filter:blur(7px); }
+    .work-modal-backdrop.open { display:grid; }
+    .work-modal { width:min(480px, 100%); padding:25px; border-radius:18px; background:#171717; border:1px solid #555; box-shadow:0 20px 70px rgba(0,0,0,.65); }
+    .work-modal label { display:block; margin:14px 0 6px; color:#ccc; font-size:.9rem; }
+    .work-modal input, .work-modal textarea { width:100%; padding:11px; border-radius:10px; border:1px solid #444; background:#090909; color:#eee; font:inherit; }
+    .work-modal textarea { min-height:110px; resize:vertical; }
+    .modal-actions { display:flex; justify-content:flex-end; gap:10px; margin-top:18px; }
+    code { color: #ddd; background: #222; padding: 2px 5px; border-radius: 4px; }
+    .contact {
+      text-align: center; padding: 38px 20px; border: 1px solid #3c3c3c;
+      border-radius: 22px; background: rgba(22,22,22,.8);
+    }
+    .contact p { color: var(--gray); }
+    footer { text-align: center; padding: 28px 0 38px; color: #888; font-size: .86rem; border-top: 1px solid #222; }
+
+    @media (max-width: 700px) {
+      .nav-links { gap: 13px; font-size: .8rem; }
+      .about-grid { grid-template-columns: 1fr; }
+      section { padding: 55px 0; }
+      .hero { min-height: 76vh; }
+    }
+    @media (max-width: 430px) {
+      .nav-links { gap: 10px; }
+      .nav-links a:nth-child(2) { display: none; }
+      .brand { font-size: .8rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <div id="stars"></div><div id="galaxy-glow"></div>
+  <header>
+    <nav class="container">
+      <a class="brand" href="#home">CEDRIC<span> .</span></a>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#interests">Interests</a>
+        <a href="#work">My Work</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero container" id="home">
+      <div class="hero-inner">
+        <div class="planet"><span>✦</span></div>
+        <div class="eyebrow">Welcome to my universe</div>
+        <h1>Hi, I'm <span>Cedric Luis</span></h1>
+        <p>DC. Cacanindin · Student Portfolio<br>
+          Exploring technology, developing new skills, and documenting my learning journey.</p>
+        <div class="actions">
+          <a class="btn primary" href="#work">Explore My Work ↘</a>
+          <a class="btn" href="#about">Get to Know Me</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="container" id="about">
+      <div class="section-head">
+        <div class="eyebrow">01 / About</div>
+        <h2>A little about me</h2>
+        <p>Curiosity is where every new journey begins.</p>
+      </div>
+      <div class="about-grid">
+        <article class="card">
+          <div class="icon">◈</div>
+          <h3>I'm Cedric Luis DC. Cacanindin</h3>
+          <p>I'm a student interested in technology and the digital world. This portfolio is my personal space to showcase my laboratory activities, projects, and progress throughout my academic journey.</p>
+        </article>
+        <aside class="mission">
+          <div class="eyebrow">My mindset</div>
+          <h3>Learn. Build. Improve.</h3>
+          <p>Small steps, consistent effort, and curiosity can lead to meaningful progress.</p>
+          <div class="tags"><span class="tag">Student</span><span class="tag">Technology</span><span class="tag">Growth</span></div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="container" id="interests">
+      <div class="section-head">
+        <div class="eyebrow">02 / Interests</div>
+        <h2>What I'm exploring</h2>
+        <p>Topics I am interested in learning and understanding.</p>
+      </div>
+      <div class="grid">
+        <article class="card"><div class="icon">▣</div><h3>Information Technology</h3><p>Learning how computers, software, and digital systems work together.</p></article>
+        <article class="card"><div class="icon">⌘</div><h3>Web Development</h3><p>Exploring how websites are designed, structured, and developed.</p></article>
+        <article class="card"><div class="icon">⬡</div><h3>Cybersecurity</h3><p>Discovering networks, digital safety, and ways to protect information.</p></article>
+      </div>
+    </section>
+
+    <section class="container" id="work">
+      <div class="section-head">
+        <div class="eyebrow">03 / Portfolio</div>
+        <h2>My Work</h2>
+        <p>Laboratory tasks, activities, and projects from my learning journey.</p>
+      </div>
+      <div class="grid">
+        <article class="card task-card" tabindex="0" role="button" aria-label="Open lab task details">
+          <div class="task-number">LAB TASK 01</div>
+          <h3 >[Enter task title]</h3>
+          <p >Click here to write a short description of your task, what you did, and what you learned.</p>
+          <div class="tags"><span class="tag" >[Subject]</span><span class="tag" >[Date]</span></div>
+        </article>
+        <article class="card task-card" tabindex="0" role="button" aria-label="Open lab task details">
+          <div class="task-number">LAB TASK 02</div>
+          <h3 >[Enter task title]</h3>
+          <p >Click here to write a short description of your task, what you did, and what you learned.</p>
+          <div class="tags"><span class="tag" >[Subject]</span><span class="tag" >[Date]</span></div>
+        </article>
+        <article class="card task-card" tabindex="0" role="button" aria-label="Open lab task details">
+          <div class="task-number">LAB TASK 03</div>
+          <h3 >[Enter task title]</h3>
+          <p >Click here to write a short description of your task, what you did, and what you learned.</p>
+          <div class="tags"><span class="tag" >[Subject]</span><span class="tag" >[Date]</span></div>
+        </article>
+      </div>
+      <div class="actions work-actions"><button class="btn primary" id="addWorkBtn" type="button">＋ Add Work</button></div>
+      <p class="edit-tip">✦ Click task text to edit it. Use <b>＋ Add Work</b> to create another card with a description and picture upload. For permanent website changes, edit <code>index.html</code> and upload it to GitHub.</p>
+    </section>
+
+    <section class="container" id="contact">
+      <div class="contact">
+        <div class="eyebrow">04 / Contact</div>
+        <h2>Let's connect</h2>
+        <p>Add your own social profile links or email address below.</p>
+        <div class="actions">
+          <!-- Replace the example links with your real profile URLs. -->
+          <a class="btn" href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">Instagram ↗</a>
+          <a class="btn" href="https://github.com/" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+          <a class="btn" href="mailto:your.email@example.com">Email ↗</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">© <span id="year"></span> Cedric Luis DC. Cacanindin · A universe of learning.</div>
+  </footer>
+  <div class="task-detail-modal-backdrop" id="taskDetailModal" role="dialog" aria-modal="true" aria-labelledby="taskDetailHeading">
+    <div class="task-detail-modal">
+      <h3 id="taskDetailHeading">Lab task details</h3>
+      <label for="detailTitle">Task title</label>
+      <input id="detailTitle" type="text" placeholder="Task title">
+      <label for="detailDescription">Description / notes</label>
+      <textarea id="detailDescription" placeholder="Write your description here..."></textarea>
+      <label for="detailSubject">Subject / date</label>
+      <input id="detailSubject" type="text" placeholder="Subject · Date">
+      <label for="detailImageInput">Picture / screenshot</label>
+      <input id="detailImageInput" type="file" accept="image/*">
+      <img class="detail-preview" id="detailImagePreview" alt="Task image preview" hidden>
+      <div class="modal-actions">
+        <button class="btn" id="removeDetailImage" type="button">Remove picture</button>
+        <button class="btn" id="closeTaskDetail" type="button">Close</button>
+        <button class="btn primary" id="saveTaskDetail" type="button">Save details</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="work-modal-backdrop" id="workModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="work-modal">
+      <h3 id="modalTitle">Add a project / lab task</h3>
+      <label for="newWorkTitle">Title</label><input id="newWorkTitle" type="text" placeholder="e.g. Activity 4: Arrays">
+      <label for="newWorkDescription">Description</label><textarea id="newWorkDescription" placeholder="Write what you did or learned..."></textarea>
+      <label for="newWorkSubject">Subject / date (optional)</label><input id="newWorkSubject" type="text" placeholder="e.g. Programming · Nov 20">
+      <label for="newWorkImage">Picture (optional)</label><input id="newWorkImage" type="file" accept="image/*">
+      <div class="modal-actions"><button class="btn" id="cancelWorkBtn" type="button">Cancel</button><button class="btn primary" id="saveWorkBtn" type="button">Add card</button></div>
+    </div>
+  </div>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Open each task tile to edit its description and attach a picture.
+    const detailModal = document.getElementById('taskDetailModal');
+    const detailTitle = document.getElementById('detailTitle');
+    const detailDescription = document.getElementById('detailDescription');
+    const detailSubject = document.getElementById('detailSubject');
+    const detailImageInput = document.getElementById('detailImageInput');
+    const detailImagePreview = document.getElementById('detailImagePreview');
+    let activeTaskCard = null, selectedImageFile = null, existingImageUrl = null;
+
+    function openTaskDetail(card) {
+      activeTaskCard = card;
+      detailTitle.value = card.querySelector('h3')?.textContent.trim() || '';
+      detailDescription.value = card.querySelector('p')?.textContent.trim() || '';
+      detailSubject.value = Array.from(card.querySelectorAll('.tag')).map(t => t.textContent.trim()).join(' · ');
+      const storedImg = card.querySelector('.task-image-data');
+      if (storedImg && storedImg.dataset.src) {
+        detailImagePreview.src = storedImg.dataset.src;
+        detailImagePreview.hidden = false;
+        existingImageUrl = storedImg.dataset.src;
+      } else {
+        detailImagePreview.removeAttribute('src');
+        detailImagePreview.hidden = true;
+        existingImageUrl = null;
+      }
+      selectedImageFile = null;
+      detailImageInput.value = '';
+      detailModal.classList.add('open');
+    }
+
+    document.querySelectorAll('#work .task-card').forEach(card => {
+      card.addEventListener('click', () => openTaskDetail(card));
+      card.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openTaskDetail(card); }
+      });
+    });
+
+    detailImageInput.addEventListener('change', () => {
+      const file = detailImageInput.files && detailImageInput.files[0];
+      if (!file || !file.type.startsWith('image/')) return;
+      selectedImageFile = file;
+      detailImagePreview.src = URL.createObjectURL(file);
+      detailImagePreview.hidden = false;
+    });
+
+    document.getElementById('removeDetailImage').addEventListener('click', () => {
+      selectedImageFile = null;
+      existingImageUrl = null;
+      detailImageInput.value = '';
+      detailImagePreview.removeAttribute('src');
+      detailImagePreview.hidden = true;
+    });
+
+    document.getElementById('closeTaskDetail').addEventListener('click', () => detailModal.classList.remove('open'));
+    detailModal.addEventListener('click', e => { if (e.target === detailModal) detailModal.classList.remove('open'); });
+
+    document.getElementById('saveTaskDetail').addEventListener('click', () => {
+      if (!activeTaskCard) return;
+      let titleEl = activeTaskCard.querySelector('h3');
+      let descEl = activeTaskCard.querySelector('p');
+      if (!titleEl) { titleEl = document.createElement('h3'); activeTaskCard.appendChild(titleEl); }
+      if (!descEl) { descEl = document.createElement('p'); activeTaskCard.appendChild(descEl); }
+      titleEl.textContent = detailTitle.value.trim() || 'Untitled Task';
+      descEl.textContent = detailDescription.value.trim() || 'No description added.';
+      let tagsEl = activeTaskCard.querySelector('.tags');
+      if (!tagsEl) { tagsEl = document.createElement('div'); tagsEl.className = 'tags'; activeTaskCard.appendChild(tagsEl); }
+      tagsEl.innerHTML = '';
+      const tag = document.createElement('span'); tag.className = 'tag'; tag.textContent = detailSubject.value.trim() || 'Lab Task'; tagsEl.appendChild(tag);
+
+      let imgData = activeTaskCard.querySelector('.task-image-data');
+      if (!imgData) { imgData = document.createElement('span'); imgData.className = 'task-image-data'; imgData.hidden = true; activeTaskCard.appendChild(imgData); }
+      if (selectedImageFile) {
+        imgData.dataset.src = URL.createObjectURL(selectedImageFile);
+        let visibleImg = activeTaskCard.querySelector('.task-detail-image');
+        if (!visibleImg) { visibleImg = document.createElement('img'); visibleImg.className = 'work-image task-detail-image'; visibleImg.alt = 'Task image'; activeTaskCard.appendChild(visibleImg); }
+        visibleImg.src = imgData.dataset.src;
+      } else if (existingImageUrl) {
+        imgData.dataset.src = existingImageUrl;
+        let visibleImg = activeTaskCard.querySelector('.task-detail-image');
+        if (!visibleImg) { visibleImg = document.createElement('img'); visibleImg.className = 'work-image task-detail-image'; visibleImg.alt = 'Task image'; activeTaskCard.appendChild(visibleImg); }
+        visibleImg.src = existingImageUrl;
+      } else {
+        delete imgData.dataset.src;
+        const visibleImg = activeTaskCard.querySelector('.task-detail-image');
+        if (visibleImg) visibleImg.remove();
+      }
+      detailModal.classList.remove('open');
+    });
+
+    // Add a new task card, then open its detail dialog so the user can fill it in.
+    const addWorkBtn = document.getElementById('addWorkBtn');
+    const workModal = document.getElementById('workModal');
+    const cancelWorkBtn = document.getElementById('cancelWorkBtn');
+    const saveWorkBtn = document.getElementById('saveWorkBtn');
+    const workGrid = document.querySelector('#work .grid');
+    let workCounter = workGrid.querySelectorAll('.task-card').length;
+
+    addWorkBtn.addEventListener('click', () => { workModal.classList.add('open'); document.getElementById('newWorkTitle').focus(); });
+    cancelWorkBtn.addEventListener('click', () => workModal.classList.remove('open'));
+    workModal.addEventListener('click', e => { if (e.target === workModal) workModal.classList.remove('open'); });
+
+    saveWorkBtn.addEventListener('click', () => {
+      const title = document.getElementById('newWorkTitle').value.trim() || 'Untitled Work';
+      const description = document.getElementById('newWorkDescription').value.trim() || 'Click this card to add details.';
+      const subject = document.getElementById('newWorkSubject').value.trim() || 'My Work';
+      const card = document.createElement('article');
+      card.className = 'card task-card'; card.tabIndex = 0; card.setAttribute('role', 'button'); card.setAttribute('aria-label', 'Open lab task details');
+      const number = document.createElement('div'); number.className = 'task-number'; number.textContent = 'LAB TASK ' + String(++workCounter).padStart(2,'0');
+      const heading = document.createElement('h3'); heading.textContent = title;
+      const paragraph = document.createElement('p'); paragraph.textContent = description;
+      const tags = document.createElement('div'); tags.className = 'tags';
+      const tag = document.createElement('span'); tag.className = 'tag'; tag.textContent = subject; tags.appendChild(tag);
+      card.append(number, heading, paragraph, tags);
+      card.addEventListener('click', () => openTaskDetail(card));
+      card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openTaskDetail(card); } });
+      workGrid.appendChild(card);
+      workModal.classList.remove('open');
+      document.getElementById('newWorkTitle').value = '';
+      document.getElementById('newWorkDescription').value = '';
+      document.getElementById('newWorkSubject').value = '';
+      card.scrollIntoView({behavior:'smooth', block:'center'});
+      openTaskDetail(card);
+    });
+  </script>
+</body>
+</html>
